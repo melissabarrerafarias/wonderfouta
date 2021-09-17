@@ -3,7 +3,8 @@ import Towel from '../towel/Towels';
 import { Link } from 'react-router-dom';
 
 function Products({ products, onAddToCart, totalItems }) {
-
+    // console.log(products[0].variant_groups[0].options[1].name)
+    // map through variant groups to display all variants
     return (
         <main>
 

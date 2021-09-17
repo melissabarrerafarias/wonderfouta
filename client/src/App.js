@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { commerce } from './lib/commerce';
 
 // components and pages 
@@ -25,18 +25,44 @@ function App() {
     setCart(addedProduct.cart)
   }
 
+  const handleCartQty = async (productId, quantity) => {
+    const updated = await commerce.cart.update(productId, { quantity });
+    setCart(updated.cart)
+  }
+
+  const handleRemoveFromCart = async (productId) => {
+    const removedItem = await commerce.cart.remove(productId);
+    setCart(removedItem.cart)
+  }
+
+  const handleEmptyCart = async () => {
+    const emptyCart = await commerce.cart.empty();
+    setCart(emptyCart);
+  }
+
   useEffect(() => {
     fetchProducts();
     fetchCart();
   }, [])
+
+  // console.log(products.categories)
 
   return (
     <Router>
       <div>
         E-commerce {/* this line can be <NavBar /> and have totalItems passed in as props (if checkout is on navbar) */}
         <Switch>
-          <Route exact path="/"><Products products={products} onAddToCart={AddToCart} totalItems={cart.total_items} /></Route> {/* totalItems can be props for NavBar in the future */}
-          <Route exact path="/cart"><Cart cart={cart} /></Route>
+          <Route exact path='/'><button><Link to = {'/products'}>Click me</Link></button></Route>{/* just to simulate home page */}
+          <Route exact path="/products">
+            <Products products={products} onAddToCart={AddToCart} totalItems={cart.total_items} />
+          </Route> {/* totalItems can be props for NavBar in the future */}
+
+          <Route exact path="/cart">
+            <Cart cart={cart}
+              handleCartQty={handleCartQty}
+              handleRemoveFromCart={handleRemoveFromCart}
+              handleEmptyCart={handleEmptyCart} />
+          </Route>
         </Switch>
       </div>
     </Router>

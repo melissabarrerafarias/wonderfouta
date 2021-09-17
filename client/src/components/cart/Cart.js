@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom'; 
 import CartItem from './cartItem/CartItem';
 
-function Cart({ cart }) {
+function Cart({ cart, handleCartQty, handleRemoveFromCart, handleEmptyCart }) {
     const isEmpty = !cart.line_items?.length
 
     const EmptyCart = () => {
@@ -19,25 +19,25 @@ function Cart({ cart }) {
             <div>
                 {cart.line_items.map((item) => (
                     <div key={item.id}>
-                        <CartItem item = {item}/>
+                        <CartItem item = {item} onUpdateCartQty={handleCartQty} onRemoveFromCart={handleRemoveFromCart}/>
                     </div>
                 ))}
                 <div>
                     <h1>Subtotal: {cart.subtotal.formatted_with_symbol}</h1>
                 </div>
                 <div>
-                    <button>Empty Cart</button>
-                    <button>Checkout</button>
+                    <button onClick={handleEmptyCart}>Empty Cart</button>
+                    <button><Link to={'/checkout'}>Checkout</Link></button>
                 </div>
             </div>
         )
     }
 
-    if (!cart.line_items) {
-        return (
-            <div>Loading...</div>
-        )
-    }
+    // if (!cart.line_items) {
+    //     return (
+    //         <div>Loading...</div>
+    //     )
+    // }
 
     return (
         <div>
