@@ -6,13 +6,13 @@ module.exports = (sequelize, DataTypes) => {
     {
       username: {
         type: DataTypes.STRING,
-        unique: true,
         allowNull: false,
         validate: {
           notNull: {
             msg: "Please enter your name",
           },
         },
+        unique: true,
       },
       email: {
         type: DataTypes.STRING,
@@ -23,6 +23,7 @@ module.exports = (sequelize, DataTypes) => {
           },
           isEmail: true,
         },
+        unique: true,
       },
       password: {
         type: DataTypes.STRING,
