@@ -1,8 +1,7 @@
 import React, { } from 'react';
+import CartItem from './cartItem/CartItem';
 
 function Cart({ cart }) {
-
-    // console.log(cart.line_items?.length)
     const isEmpty = !cart.line_items?.length
 
     const EmptyCart = () => {
@@ -18,7 +17,7 @@ function Cart({ cart }) {
             <div>
                 {cart.line_items.map((item) => (
                     <div key={item.id}>
-                        <p>{item.name}</p>
+                        <CartItem item = {item}/>
                     </div>
                 ))}
                 <div>
@@ -29,6 +28,12 @@ function Cart({ cart }) {
                     <button>Checkout</button>
                 </div>
             </div>
+        )
+    }
+
+    if (!cart.line_items) {
+        return (
+            <div>Loading...</div>
         )
     }
 
