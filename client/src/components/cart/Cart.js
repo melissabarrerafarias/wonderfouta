@@ -1,4 +1,5 @@
-import React, { } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom'; 
 import CartItem from './cartItem/CartItem';
 
 function Cart({ cart }) {
@@ -8,6 +9,7 @@ function Cart({ cart }) {
         return (
             <div>
                 <h1>You don't have any items in your cart!</h1>
+                <Link to={'/'}>Start Shopping</Link>
             </div>
         )
     }
