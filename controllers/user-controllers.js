@@ -23,7 +23,7 @@ module.exports = {
   login: async (req, res) => {
     try {
       const { username, email, password } = await req.body;
-      console.log(username, email, password);
+    //   console.log(username, email, password);
       res.send({ username, email, password });
     } catch (err) {
       console.log(err);
