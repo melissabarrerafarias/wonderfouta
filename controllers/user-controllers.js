@@ -4,7 +4,7 @@ module.exports = {
   getUsers: async (req, res) => {
     try {
       const users = await db.User.findAll();
-    //   console.log(users);
+      //   console.log(users);
       res.send(users);
     } catch (err) {
       console.log(err);
@@ -20,10 +20,27 @@ module.exports = {
       console.log(err);
     }
   },
-  login: (req, res) => {
-    res.send({ msg: "log me in" });
+  login: async (req, res) => {
+    try {
+      const { username, email, password } = await req.body;
+      console.log(username, email, password);
+      res.send({ username, email, password });
+    } catch (err) {
+      console.log(err);
+    }
   },
-  update: (req, res) => {
-    res.send({ msg: "update my info" });
+  update: async (req, res) => {
+    try {
+      const update = await req.body;
+    //   console.log(update);
+      db.User.update(update, {
+        where: {
+          id: update.id,
+        },
+      });
+      res.send(update);
+    } catch (err) {
+      console.log(err);
+    }
   },
 };
