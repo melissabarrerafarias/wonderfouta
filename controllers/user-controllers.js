@@ -32,13 +32,27 @@ module.exports = {
   update: async (req, res) => {
     try {
       const update = await req.body;
-    //   console.log(update);
+      //   console.log(update);
       db.User.update(update, {
         where: {
           id: update.id,
         },
       });
       res.send(update);
+    } catch (err) {
+      console.log(err);
+    }
+  },
+  deleteUser: async (req, res) => {
+    try {
+      const id = await req.params.id;
+      // console.log(id);
+      db.User.destroy({
+        where: {
+          id: id,
+        },
+      });
+      res.send({ msg: `deleted user id ${id}` });
     } catch (err) {
       console.log(err);
     }
