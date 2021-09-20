@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { commerce } from './lib/commerce';
@@ -5,6 +6,10 @@ import { commerce } from './lib/commerce';
 // components and pages 
 import Products from './components/products/Products';
 import Cart from './components/cart/Cart';
+import { React } from 'react';
+import './App.css';
+import Navbar from './componets/Navbar';
+
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -55,8 +60,8 @@ function App() {
 
   return (
     <Router>
-      <div>
-        E-commerce {/* this line can be <NavBar /> and have totalItems passed in as props (if checkout is on navbar) */}
+      <div> 
+        <Navbar/> {/* this line can be <NavBar /> and have totalItems passed in as props (if checkout is on navbar) */}
         <Switch>
           <Route exact path='/'><button><Link to = {'/products'}>Click me</Link></button></Route>{/* just to simulate home page */}
           <Route exact path="/products">
