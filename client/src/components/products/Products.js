@@ -8,7 +8,7 @@ function Products({ products, onAddToCart, totalItems }) {
     return (
         <main>
 
-            <button><Link to={'/cart'}>Cart {totalItems}</Link></button>{/* button at top of the page to represent cart icon */}
+            <button><Link to={'/cart'}>Cart{totalItems}</Link></button>{/* button at top of the page to represent cart icon */}
             <div>
                 {products.map((product) => (
                     <div key={product.id}>

@@ -40,12 +40,18 @@ function App() {
     setCart(emptyCart);
   }
 
+  const retrieveProductVariants = async () => {
+    const productVariants = await commerce.products.getVariants('prod_kpnNwAyMYawmXB'); 
+    console.log(productVariants); 
+  } 
+
   useEffect(() => {
     fetchProducts();
     fetchCart();
+    // retrieveProductVariants();
   }, [])
-
-  // console.log(products.categories)
+  // console.log(products)
+  console.log(products[1])
 
   return (
     <Router>
