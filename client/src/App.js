@@ -44,18 +44,11 @@ function App() {
     setCart(emptyCart);
   }
 
-  // const retrieveProductVariants = async () => {
-  //   const productVariants = await commerce.products.getVariants('prod_kpnNwAyMYawmXB');
-  //   console.log(productVariants);
-  // }
-
   useEffect(() => {
     fetchProducts();
     fetchCart();
-    // retrieveProductVariants();
   }, [])
 
-  console.log(products)
 
   return (
     <Router>
