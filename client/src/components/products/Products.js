@@ -7,7 +7,6 @@ function Products({ products, onAddToCart, totalItems }) {
     // map through variant groups to display all variants
     return (
         <main>
-
             <button><Link to={'/cart'}>Cart{totalItems}</Link></button>{/* button at top of the page to represent cart icon */}
             <div>
                 {products.map((product) => (

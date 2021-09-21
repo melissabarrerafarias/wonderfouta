@@ -65,7 +65,7 @@ function App() {
         <Switch>
           <Route exact path='/'><button><Link to={'/products'}>Click me</Link></button></Route>{/* just to simulate home page */}
           <Route exact path="/products">
-            <Products products={products} onAddToCart={AddToCart} totalItems={cart.total_items} />
+            <Products products={products} totalItems={cart.total_items} />
           </Route> {/* totalItems can be props for NavBar in the future */}
 
           <Route exact path="/cart">
@@ -75,7 +75,7 @@ function App() {
               handleEmptyCart={handleEmptyCart} />
           </Route>
           <Route exact path="/products/:id">
-            <TowelCollection products={products} />
+            <TowelCollection onAddToCart={AddToCart}/>
           </Route>
         </Switch>
       </div>
