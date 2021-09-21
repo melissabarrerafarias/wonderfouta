@@ -1,11 +1,11 @@
 .navbar {
-    background: black;
+    background: transparent;
     height: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
-    font-family: archivo Black;
-    font-size: 1.2rem;
+    font-family: archivo white;
+    font-size: 1.7rem;
     position: sticky;
     top: 0;
     z-index: 999;
@@ -16,11 +16,11 @@
     justify-content: center;
     align-items: center;
     height: 80px;
-    max-width: 1500px;
+    max-width: 1400px;
   }
   
   .navbar-logo {
-    color: #fff;
+    color: pink;
     justify-self: start;
     margin-left: 20px;
     cursor: pointer;
@@ -37,21 +37,21 @@
   
   .nav-menu {
     display: grid;
-    grid-template-columns: repeat(5, auto);
-    grid-gap: 10px;
+    grid-template-columns: repeat(6, auto);
+    grid-gap: 40px;
     list-style: none;
     text-align: center;
-    width: 60vw;
+    width: 40vw;
     justify-content: end;
-    margin-right: 2rem;
+    margin-right: 3rem;
   }
   
   .nav-item {
-    height: 80px;
+    height: 0px;
   }
   
   .nav-links {
-    color: #fff;
+    color:pink;
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -60,12 +60,12 @@
   }
   
   .nav-links:hover {
-    border-bottom: 4px solid #fff;
+    border-bottom: 4px solid pink;
     transition: all 0.2s ease-out;
   }
   
   .fa-bars {
-    color: #fff;
+    color:pink;
   }
   
   .nav-links-mobile {
