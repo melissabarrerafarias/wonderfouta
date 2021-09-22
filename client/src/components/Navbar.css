@@ -5,7 +5,7 @@
     justify-content: center;
     align-items: center;
     font-family: archivo white;
-    font-size: 1.7rem;
+    font-size: 1.3rem;
     position: sticky;
     top: 0;
     z-index: 999;
@@ -38,12 +38,12 @@
   .nav-menu {
     display: grid;
     grid-template-columns: repeat(6, auto);
-    grid-gap: 40px;
+    grid-gap: 80px;
     list-style: none;
     text-align: center;
-    width: 40vw;
+    width: 70vw;
     justify-content: end;
-    margin-right: 3rem;
+    margin-right: 1rem;
   }
   
   .nav-item {
@@ -51,7 +51,7 @@
   }
   
   .nav-links {
-    color:pink;
+    color:black;
     display: flex;
     align-items: center;
     text-decoration: none;
@@ -84,26 +84,27 @@
     .nav-menu {
       display: flex;
       flex-direction: column;
+      background-color: white;
       width: 100%;
-      height: 90vh;
+      height: 70vh;
       position: absolute;
-      top: 80px;
+      top: 20px;
       left: -100%;
       opacity: 1;
-      transition: all 0.5s ease;
+      transition: all 0.8s ease;
     }
   
     .nav-menu.active {
-      background: #242222;
+      background: white;
       left: 0;
       opacity: 1;
-      transition: all 0.5s ease;
+      transition: all 0.8s ease;
       z-index: 1;
     }
   
     .nav-links {
       text-align: center;
-      padding: 2rem;
+      padding: 1rem;
       width: 100%;
       display: table;
     }
@@ -126,7 +127,7 @@
     }
   
     .fa-times {
-      color: #fff;
+      color:pink;
       font-size: 2rem;
     }
   

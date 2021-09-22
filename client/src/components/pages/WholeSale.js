@@ -1,18 +1,18 @@
 import React from 'react';
 import '../../App.css';
-import HeadSection from '../HeadSection';
-import Navbar from '../Navbar';
 import Footer from '../Footer';
+import Navbar from '../Navbar';
 
-function Home() {
+
+
+function WholeSale() {
     return (
         <>
-            <HeadSection />
+            <h1>Whole Sale</h1>
             <Navbar />
-            <h1>News</h1>
             <Footer />
         </>
     );
 }
 
-export default Home;
+export default WholeSale;

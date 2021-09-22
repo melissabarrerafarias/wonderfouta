@@ -1,18 +1,16 @@
 import React from 'react';
 import '../../App.css';
-import HeadSection from '../HeadSection';
-import Navbar from '../Navbar';
 import Footer from '../Footer';
+import Navbar from '../Navbar';
 
-function Home() {
+function Login() {
     return (
         <>
-            <HeadSection />
+            <h1>hello</h1>
             <Navbar />
-            <h1>News</h1>
             <Footer />
         </>
     );
 }
 
-export default Home;
+export default Login;

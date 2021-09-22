@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './Navbar.css'
 import Products from '../components/products/Products';
 
+
 function Navbar() {
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
@@ -43,7 +44,7 @@ function Navbar() {
                             </Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to='/products' className='nav-links' onClick={closeMobileMenu}>
+                            <Link to='/Store' className='nav-links' onClick={closeMobileMenu}>
                                 Store
                             </Link>
                         </li>
@@ -53,7 +54,7 @@ function Navbar() {
                             </Link>
                         </li>
                         <li className='nav-item'>
-                            <Link to='/ContactUs' className='nav-links' onClick={closeMobileMenu}>
+                            <Link to='/Contact' className='nav-links' onClick={closeMobileMenu}>
                                 Contact Us
                             </Link>
                         </li>

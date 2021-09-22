@@ -10,6 +10,12 @@ import Cart from './components/cart/Cart';
 import './App.css';
 import Navbar from './components/Navbar';
 import Home from './components/pages/Home'
+import About from './components/pages/About';
+import Store from './components/pages/Store';
+import WholeSale from './components/pages/WholeSale';
+import Contact from './components/pages/Contact';
+import Login from './components/pages/Login';
+
 
 
 function App() {
@@ -62,9 +68,14 @@ function App() {
   return (
     <Router>
       <div>
-        <Navbar />
+        {/* <Navbar /> */}
         <Switch>
           <Route path='/' exact component={Home} />
+          <Route path='/About' exact component={About} />
+          <Route path='/Store' exact component={Store} />
+          <Route path='/WholeSale' exact component={WholeSale} />
+          <Route path='/Contact' exact component={Contact} />
+          <Route path='/Login' exact component={Login} />
           <Route exact path='/'><button><Link to={'/products'}>Store</Link></button></Route>{/* just to simulate home page */}
           <Route exact path="/products">
             <Products products={products} onAddToCart={AddToCart} totalItems={cart.total_items} />

@@ -2,6 +2,8 @@
 import { React } from 'react';
 import '../../App.css'
 import Navbar from '../Navbar';
+import Cards from '../Cards';
+
 
 
 
@@ -9,7 +11,9 @@ function About() {
     return (
         <>
             <Navbar />
-            <p>hello world!</p>
+            <Cards />
+            <h1>ABOUT US.</h1>
+            <h1>Text About Us.</h1>
         </>
     )
 }
