@@ -1,4 +1,4 @@
-import React, { Link } from 'react';
+import React from 'react';
 
 function Towel({ product, onAddToCart }) {
 
@@ -9,7 +9,7 @@ function Towel({ product, onAddToCart }) {
                 <h3>{product.price.formatted_with_symbol}</h3>
                 <p dangerouslySetInnerHTML={{ __html: product.description }}></p>
                 <button onClick={() => onAddToCart(product.id, 1)}>Add to Cart</button>{/*functionality to add to cart */}
-            </div>
+            </div> 
     )
 };
 

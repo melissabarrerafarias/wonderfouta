@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom';
 import CartItem from './cartItem/CartItem';
 
 function Cart({ cart, handleCartQty, handleRemoveFromCart, handleEmptyCart }) {
@@ -19,7 +19,7 @@ function Cart({ cart, handleCartQty, handleRemoveFromCart, handleEmptyCart }) {
             <div>
                 {cart.line_items.map((item) => (
                     <div key={item.id}>
-                        <CartItem item = {item} onUpdateCartQty={handleCartQty} onRemoveFromCart={handleRemoveFromCart}/>
+                        <CartItem item={item} onUpdateCartQty={handleCartQty} onRemoveFromCart={handleRemoveFromCart} />
                     </div>
                 ))}
                 <div>
