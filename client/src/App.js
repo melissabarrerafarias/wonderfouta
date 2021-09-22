@@ -24,8 +24,8 @@ function App() {
     setCart(cart);
   }
 
-  const AddToCart = async (productId, quantity) => {
-    const addedProduct = await commerce.cart.add(productId, quantity);
+  const AddToCart = async (productId, quantity, variantId) => {
+    const addedProduct = await commerce.cart.add(productId, quantity, variantId);
     setCart(addedProduct.cart)
   }
 
