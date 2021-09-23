@@ -5,7 +5,7 @@ function Towel({ product }) {
     return (
             <div id={product.id}>
                 <img src={product.media.source} style={{ maxWidth: '200px' }}></img>
-                <a href={`/products/${product.id}`}>{product.name}</a>
+                <a href={`/Store/${product.id}`}>{product.name}</a>
             </div>
     )
 };
