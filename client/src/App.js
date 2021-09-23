@@ -15,8 +15,6 @@ import WholeSale from './components/pages/WholeSale';
 import Contact from './components/pages/Contact';
 import Login from './components/pages/Login';
 
-
-
 function App() {
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
