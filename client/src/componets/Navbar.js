@@ -2,7 +2,8 @@
 // import { Link } from 'react-router-dom';
 
 // const [click, setClick] = useState(false);
-// // const [button, setButton] = useState(true);
+// const [button, setButton] = useState(true);
+
 
 // const handleClick = () => setClick(!click);
 // const closeMobileMenu = () => setClick(false);
@@ -58,4 +59,7 @@
 //             </div>
 //         </nav>
 //     </>
-// export default Navbar
+// )
+// }
+
+// export default Navbar; 

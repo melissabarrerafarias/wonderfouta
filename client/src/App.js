@@ -1,14 +1,20 @@
-
 import React, { useState, useEffect } from 'react';
 // import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { commerce } from './lib/commerce';
 
+
 // components and pages 
-// import Products from './components/products/Products';
-// import Cart from './components/cart/Cart';
+import Products from './components/products/Products';
+import Cart from './components/cart/Cart';
+import TowelCollection from './components/towelCollection.js/TowelCollection';
 import './App.css';
-// import Navbar from './componets/Navbar';
-import Login from './componets/pages/Login';
+// import Navbar from './components/Navbar';
+import Home from './components/pages/Home'
+import About from './components/pages/About';
+import Store from './components/pages/Store';
+import WholeSale from './components/pages/WholeSale';
+import Contact from './components/pages/Contact';
+import Login from './components/pages/Login';
 
 
 function App() {
@@ -44,43 +50,49 @@ function App() {
   //   const emptyCart = await commerce.cart.empty();
   //   setCart(emptyCart);
   // }
+  
+  //   const productVariants = await commerce.products.getVariants('prod_kpnNwAyMYawmXB');
+  //   console.log(productVariants);
+  // }
 
-  // const retrieveProductVariants = async () => {
-  //   const productVariants = await commerce.products.getVariants('prod_kpnNwAyMYawmXB'); 
-  //   console.log(productVariants); 
-  // } 
+  useEffect(() => {
+    fetchProducts();
+    fetchCart();
+    // retrieveProductVariants();
+  }, [])
 
-  // useEffect(() => {
-  //   fetchProducts();
-  //   fetchCart();
-  //   // retrieveProductVariants();
-  // }, [])
-  // // console.log(products)
-  // console.log(products[1])
+  console.log(products)
 
   return (
-    <div>
-      <Login/>
+    <Router>
+      <div>
+        {/* <Navbar/>  */}
+        {/* this line can be <NavBar /> and have totalItems passed in as props (if checkout is on navbar) */}
+        {/* <Route exact path='/'><button><Link to={'/products'}>Click me</Link></button></Route>just to simulate home page */}
+        {/* <Navbar /> */}
+        <Switch>
+          <Route path='/' exact component={Home} />
+          <Route path='/About' exact component={About} />
+          <Route path='/Store' exact component={Store} />
+          <Route path='/WholeSale' exact component={WholeSale} />
+          <Route path='/Contact' exact component={Contact} />
+          <Route path='/Login' exact component={Login} />
+          <Route exact path='/'><button><Link to={'/products'}>Store</Link></button></Route>{/* just to simulate home page */}
+          <Route exact path="/products">
+            <Products products={products} onAddToCart={AddToCart} totalItems={cart.total_items} />
+          </Route> {/* totalItems can be props for NavBar in the future */}
+          <Route exact path="/cart">
+            <Cart cart={cart}
+              handleCartQty={handleCartQty}
+              handleRemoveFromCart={handleRemoveFromCart}
+              handleEmptyCart={handleEmptyCart} />
+          </Route>
+          <Route exact path="/products/:id">
+            <TowelCollection products={products} />
+          </Route>
+        </Switch>
       </div>
-    
-    // <Router>
-    //   <div> 
-    //     <Navbar/> this line can be <NavBar /> and have totalItems passed in as props (if checkout is on navbar)
-    //     <Switch>
-    //       <Route exact path='/'><button><Link to = {'/products'}>Click me</Link></button></Route>{/* just to simulate home page */}
-    //       <Route exact path="/products">
-    //         <Products products={products} onAddToCart={AddToCart} totalItems={cart.total_items} />
-    //       </Route> {/* totalItems can be props for NavBar in the future */}
-
-    //       <Route exact path="/cart">
-    //         <Cart cart={cart}
-    //           handleCartQty={handleCartQty}
-    //           handleRemoveFromCart={handleRemoveFromCart}
-    //           handleEmptyCart={handleEmptyCart} />
-    //       </Route>
-    //     </Switch>
-    //   </div>
-    // </Router>
+    </Router >
   );
 }
 
