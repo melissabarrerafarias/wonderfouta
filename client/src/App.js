@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+// import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { commerce } from './lib/commerce';
 
 
@@ -17,42 +17,40 @@ import Contact from './components/pages/Contact';
 import Login from './components/pages/Login';
 
 
-
 function App() {
-  const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState({});
+  // const [products, setProducts] = useState([]);
+  // const [cart, setCart] = useState({});
 
-  const fetchProducts = async () => { // get product list from commerce js and set state
-    const { data } = await commerce.products.list();
-    setProducts(data) //set the state
-  }
+  // const fetchProducts = async () => { // get product list from commerce js and set state
+  //   const { data } = await commerce.products.list();
+  //   setProducts(data) //set the state
+  // }
 
-  const fetchCart = async () => { //get cart info from commerce js and set state
-    const cart = await commerce.cart.retrieve();
-    setCart(cart);
-  }
+  // const fetchCart = async () => { //get cart info from commerce js and set state
+  //   const cart = await commerce.cart.retrieve();
+  //   setCart(cart);
+  // }
 
-  const AddToCart = async (productId, quantity) => {
-    const addedProduct = await commerce.cart.add(productId, quantity);
-    setCart(addedProduct.cart)
-  }
+  // const AddToCart = async (productId, quantity) => {
+  //   const addedProduct = await commerce.cart.add(productId, quantity);
+  //   setCart(addedProduct.cart)
+  // }
 
-  const handleCartQty = async (productId, quantity) => {
-    const updated = await commerce.cart.update(productId, { quantity });
-    setCart(updated.cart)
-  }
+  // const handleCartQty = async (productId, quantity) => {
+  //   const updated = await commerce.cart.update(productId, { quantity });
+  //   setCart(updated.cart)
+  // }
 
-  const handleRemoveFromCart = async (productId) => {
-    const removedItem = await commerce.cart.remove(productId);
-    setCart(removedItem.cart)
-  }
+  // const handleRemoveFromCart = async (productId) => {
+  //   const removedItem = await commerce.cart.remove(productId);
+  //   setCart(removedItem.cart)
+  // }
 
-  const handleEmptyCart = async () => {
-    const emptyCart = await commerce.cart.empty();
-    setCart(emptyCart);
-  }
-
-  // const retrieveProductVariants = async () => {
+  // const handleEmptyCart = async () => {
+  //   const emptyCart = await commerce.cart.empty();
+  //   setCart(emptyCart);
+  // }
+  
   //   const productVariants = await commerce.products.getVariants('prod_kpnNwAyMYawmXB');
   //   console.log(productVariants);
   // }
