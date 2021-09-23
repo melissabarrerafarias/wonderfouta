@@ -6,8 +6,15 @@ import { commerce } from './lib/commerce';
 import Products from './components/products/Products';
 import Cart from './components/cart/Cart';
 import TowelCollection from './components/towelCollection.js/TowelCollection';
+
 import './App.css';
-// import Navbar from './componets/Navbar';
+import Home from './components/pages/Home'
+import About from './components/pages/About';
+import Store from './components/pages/Store';
+import WholeSale from './components/pages/WholeSale';
+import Contact from './components/pages/Contact';
+import Login from './components/pages/Login';
+
 
 
 function App() {
@@ -55,12 +62,19 @@ function App() {
       <div>
         {/* <Navbar/>  */}
         {/* this line can be <NavBar /> and have totalItems passed in as props (if checkout is on navbar) */}
+        {/* <Route exact path='/'><button><Link to={'/products'}>Click me</Link></button></Route>just to simulate home page */}
+        {/* <Navbar /> */}
         <Switch>
-          <Route exact path='/'><button><Link to={'/products'}>Click me</Link></button></Route>{/* just to simulate home page */}
+          <Route path='/' exact component={Home} />
+          <Route path='/About' exact component={About} />
+          <Route path='/Store' exact component={Store} />
+          <Route path='/WholeSale' exact component={WholeSale} />
+          <Route path='/Contact' exact component={Contact} />
+          <Route path='/Login' exact component={Login} />
+          <Route exact path='/'><button><Link to={'/products'}>Store</Link></button></Route>{/* just to simulate home page */}
           <Route exact path="/products">
             <Products products={products} totalItems={cart.total_items} />
           </Route> {/* totalItems can be props for NavBar in the future */}
-
           <Route exact path="/cart">
             <Cart cart={cart}
               handleCartQty={handleCartQty}
@@ -68,11 +82,11 @@ function App() {
               handleEmptyCart={handleEmptyCart} />
           </Route>
           <Route exact path="/products/:id">
-            <TowelCollection onAddToCart={AddToCart}/>
+            <TowelCollection onAddToCart={AddToCart} />
           </Route>
         </Switch>
       </div>
-    </Router>
+    </Router >
   );
 }
 
