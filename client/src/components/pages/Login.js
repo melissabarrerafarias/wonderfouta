@@ -3,6 +3,7 @@ import "../../App.css";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
 import UserContext from "../../context/UserContext";
+import axios from "axios";
 
 function Login() {
   const [data, setData] = useState({ user: undefined, token: undefined });
@@ -37,7 +38,9 @@ function Login() {
         website: user.website,
         password: user.password,
       };
-      console.log(officialInfo);
+      // console.log(officialInfo);
+      const signUp = await axios.post("user/signUp", officialInfo);
+      console.log(signUp);
     } catch (error) {
       console.log(error);
     }
