@@ -20,14 +20,24 @@ function Login() {
   };
 
   const onChange = async (e) => {
-    setUser({...user, [e.target.name]: e.target.value });
-    console.log(user);
+    setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   const getFormInfo = async (e) => {
     try {
       e.preventDefault();
-      console.log("hi");
+      const address = `${user.street}, ${user.city}, ${user.state} ${user.postalCode}`;
+      const officialInfo = {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        address: address,
+        phone: parseInt(user.phone),
+        storeCompany: user.storeCompany,
+        website: user.website,
+        password: user.password,
+      };
+      console.log(officialInfo);
     } catch (error) {
       console.log(error);
     }
@@ -50,12 +60,6 @@ function Login() {
             <label>
               Last Name:
               <input onChange={onChange} type="text" name="lastName" />
-            </label>
-          </li>
-          <li>
-            <label>
-              Email:
-              <input onChange={onChange} type="text" name="email" />
             </label>
           </li>
           <li>
@@ -96,14 +100,26 @@ function Login() {
           <li>
             <label>
               Phone:
-              <input onChange={onChange} type="text" name="phone" />
+              <input onChange={onChange} type="number" name="phone" />
             </label>
           </li>
 
           <li>
             <label>
               Website:
-              <input onChange={onChange} type="text" name="website" />
+              <input onChange={onChange} type="url" name="website" />
+            </label>
+          </li>
+          <li>
+            <label>
+              Email:
+              <input onChange={onChange} type="email" name="email" />
+            </label>
+          </li>
+          <li>
+            <label>
+              Password:
+              <input onChange={onChange} type="password" name="password" />
             </label>
           </li>
         </ul>
