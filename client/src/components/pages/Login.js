@@ -6,6 +6,7 @@ import UserContext from "../../context/UserContext";
 
 function Login() {
   const [data, setData] = useState({ user: undefined, token: undefined });
+  const [user, setUser] = useState();
   const checkToken = async () => {
     try {
       let token = await localStorage.getItem("auth-token");
@@ -17,57 +18,92 @@ function Login() {
       console.log(error);
     }
   };
+
+  const onChange = async (e) => {
+    setUser({...user, [e.target.name]: e.target.value });
+    console.log(user);
+  };
+
+  const getFormInfo = async (e) => {
+    try {
+      e.preventDefault();
+      console.log("hi");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     checkToken();
   }, []);
   return (
     <>
-      <form>
+      <form onSubmit={getFormInfo}>
         <ul>
           <li>
             <label>
               First Name:
-              <input type="text" name="firstName" />
+              <input onChange={onChange} type="text" name="firstName" />
             </label>
           </li>
           <li>
             <label>
               Last Name:
-              <input type="text" name="lastName" />
+              <input onChange={onChange} type="text" name="lastName" />
             </label>
           </li>
           <li>
             <label>
               Email:
-              <input type="text" name="email" />
+              <input onChange={onChange} type="text" name="email" />
             </label>
           </li>
           <li>
             <label>
               Store or Company:
-              <input type="text" name="storeCompany" />
+              <input onChange={onChange} type="text" name="storeCompany" />
             </label>
           </li>
           <li>
             <label>
               Address:
-              <input type="text" name="street" placeholder="Street" />
-              <input type="text" name="city" placeholder="City" />
-              <input type="text" name="state" placeholder="State" />
-              <input type="text" name="postalCode" placeholder="Postal Code" />
+              <input
+                onChange={onChange}
+                type="text"
+                name="street"
+                placeholder="Street"
+              />
+              <input
+                onChange={onChange}
+                type="text"
+                name="city"
+                placeholder="City"
+              />
+              <input
+                onChange={onChange}
+                type="text"
+                name="state"
+                placeholder="State"
+              />
+              <input
+                onChange={onChange}
+                type="text"
+                name="postalCode"
+                placeholder="Postal Code"
+              />
             </label>
           </li>
           <li>
             <label>
               Phone:
-              <input type="text" name="phone" />
+              <input onChange={onChange} type="text" name="phone" />
             </label>
           </li>
 
           <li>
             <label>
               Website:
-              <input type="text" name="website" value="https://" />
+              <input onChange={onChange} type="text" name="website" />
             </label>
           </li>
         </ul>
