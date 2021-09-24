@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-// import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { commerce } from './lib/commerce';
 
 // components and pages 
@@ -15,58 +15,40 @@ import WholeSale from './components/pages/WholeSale';
 import Contact from './components/pages/Contact';
 import Login from './components/pages/Login';
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 6b3a5a7786e83caa46d14c2dc88a2373086465bb
 function App() {
-  // const [products, setProducts] = useState([]);
-  // const [cart, setCart] = useState({});
+  const [products, setProducts] = useState([]);
+  const [cart, setCart] = useState({});
 
-  // const fetchProducts = async () => { // get product list from commerce js and set state
-  //   const { data } = await commerce.products.list();
-  //   setProducts(data) //set the state
-  // }
+  const fetchProducts = async () => { // get product list from commerce js and set state
+    const { data } = await commerce.products.list();
+    setProducts(data) //set the state
+  }
 
-<<<<<<< HEAD
+  const fetchCart = async () => { //get cart info from commerce js and set state
+    const cart = await commerce.cart.retrieve();
+    setCart(cart);
+  }
+  
   const AddToCart = async (productId, quantity, variantId) => {
     const addedProduct = await commerce.cart.add(productId, quantity, variantId);
     setCart(addedProduct.cart)
   }
-=======
-  // const fetchCart = async () => { //get cart info from commerce js and set state
-  //   const cart = await commerce.cart.retrieve();
-  //   setCart(cart);
-  // }
->>>>>>> 6b3a5a7786e83caa46d14c2dc88a2373086465bb
 
-  // const AddToCart = async (productId, quantity) => {
-  //   const addedProduct = await commerce.cart.add(productId, quantity);
-  //   setCart(addedProduct.cart)
-  // }
+  const handleCartQty = async (productId, quantity) => {
+    const updated = await commerce.cart.update(productId, { quantity });
+    setCart(updated.cart)
+  }
 
-  // const handleCartQty = async (productId, quantity) => {
-  //   const updated = await commerce.cart.update(productId, { quantity });
-  //   setCart(updated.cart)
-  // }
+  const handleRemoveFromCart = async (productId) => {
+    const removedItem = await commerce.cart.remove(productId);
+    setCart(removedItem.cart)
+  }
 
-  // const handleRemoveFromCart = async (productId) => {
-  //   const removedItem = await commerce.cart.remove(productId);
-  //   setCart(removedItem.cart)
-  // }
+  const handleEmptyCart = async () => {
+    const emptyCart = await commerce.cart.empty();
+    setCart(emptyCart);
+  }
 
-<<<<<<< HEAD
-=======
-  // const handleEmptyCart = async () => {
-  //   const emptyCart = await commerce.cart.empty();
-  //   setCart(emptyCart);
-  // }
-  
-  //   const productVariants = await commerce.products.getVariants('prod_kpnNwAyMYawmXB');
-  //   console.log(productVariants);
-  // }
-
->>>>>>> 6b3a5a7786e83caa46d14c2dc88a2373086465bb
   useEffect(() => {
     fetchProducts();
     fetchCart();
@@ -102,5 +84,6 @@ function App() {
     </Router >
   );
 }
+
 
 export default App;
