@@ -9,7 +9,6 @@ function WholeSale() {
     return (
         <>
             <h1>Whole Sale
-            Blash blhaashjadsdads
             </h1>
             <Navbar />
             <Footer />
