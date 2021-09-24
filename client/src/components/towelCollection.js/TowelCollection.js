@@ -2,24 +2,66 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { commerce } from '../../lib/commerce';
 
-function TowelCollection() {
-    const { id: productId } = useParams(); // id = productId
+function TowelCollection({ onAddToCart }) {
+    const { id: productId } = useParams(); // id = productId (from parameters)
 
-    const [singleProduct, setSingleProduct] = useState([]);
+    const [collection, setCollection] = useState([]); // all data
 
-    const retrieveSingleProduct = async () => {
-        const singleProduct = await commerce.products.retrieve(productId);
-        setSingleProduct(singleProduct)
+    const [towelNames, setTowelNames] = useState([]); // name/color data (comes in different response that rest of data ^)
+
+    const [selectedProduct, setSelectedProduct] = useState({}); // changing onClick to selected image
+
+    const retrieveName = async () => { // name data to set in state
+        const product = await commerce.products.retrieve(productId);
+        let names = product.variant_groups[0].options;
+        setTowelNames(names);
+    } 
+
+    const retrieveProductVariants = async () => { // setting state to specific collection variants 
+        const { data } = await commerce.products.getVariants(productId);
+        setCollection(data);
+        setSelectedProduct({ //setting initial image on page load
+            img: data[1]?.assets[0].url,
+            id: data[1]?.id,
+            description: data[1]?.description,
+            price: data[1].price?.formatted_with_symbol
+        })
     }
 
+    const displaySingleProduct = async (e) => { // setting selected product state to selected product
+        setSelectedProduct(
+            { img: e.target.src, id: e.target.id, description: e.target.dataset.description, price: e.target.dataset.price }
+        )
+    } 
+
     useEffect(() => {
-        retrieveSingleProduct();
-    }, [])
+        retrieveProductVariants();
+        retrieveName();
+    }, []) // retrieving data on page load ^
 
     return (
         <div>
-            <p>hi this is where a single towel collection is gonna go</p>
-            <p>{singleProduct.name}</p>
+            {/* selected towel */}
+            <div>
+                <img src={selectedProduct.img}></img>
+                <h3>{selectedProduct.price}</h3>
+                <p dangerouslySetInnerHTML={{ __html: selectedProduct.description }}></p>
+                <button onClick={() => onAddToCart(productId, 1, selectedProduct.id)}>Add to Cart</button>{/*functionality to add to cart */}
+            </div>
+
+            {/* all towels styles */}
+            <div>
+                {collection?.map((variant, index) => (
+                    <div onClick={(e) => displaySingleProduct(e)} key={variant?.id} >
+                        <img src={variant?.assets[0].url}
+                            id={variant?.id}
+                            data-description={variant?.description}
+                            data-price={variant.price?.formatted_with_symbol}
+                        />
+                        {towelNames[index]?.name} {/* shows towel name/color */}
+                    </div>
+                ))}
+            </div>
         </div>
     )
 };

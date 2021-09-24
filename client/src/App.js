@@ -2,20 +2,18 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { commerce } from './lib/commerce';
 
-
 // components and pages 
-import Products from './components/products/Products';
+// import Products from './components/products/Products';
 import Cart from './components/cart/Cart';
 import TowelCollection from './components/towelCollection.js/TowelCollection';
+
 import './App.css';
-// import Navbar from './components/Navbar';
 import Home from './components/pages/Home'
 import About from './components/pages/About';
 import Store from './components/pages/Store';
 import WholeSale from './components/pages/WholeSale';
 import Contact from './components/pages/Contact';
 import Login from './components/pages/Login';
-
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -30,9 +28,9 @@ function App() {
     const cart = await commerce.cart.retrieve();
     setCart(cart);
   }
-
-  const AddToCart = async (productId, quantity) => {
-    const addedProduct = await commerce.cart.add(productId, quantity);
+  
+  const AddToCart = async (productId, quantity, variantId) => {
+    const addedProduct = await commerce.cart.add(productId, quantity, variantId);
     setCart(addedProduct.cart)
   }
 
@@ -50,46 +48,37 @@ function App() {
     const emptyCart = await commerce.cart.empty();
     setCart(emptyCart);
   }
-  
-    const productVariants = commerce.products.getVariants('prod_kpnNwAyMYawmXB');
-    console.log(productVariants);
-  
 
   useEffect(() => {
     fetchProducts();
     fetchCart();
-    // retrieveProductVariants();
   }, [])
 
-  console.log(products)
 
   return (
     <Router>
       <div>
-        {/* <Navbar/>  */}
-        {/* this line can be <NavBar /> and have totalItems passed in as props (if checkout is on navbar) */}
-        {/* <Route exact path='/'><button><Link to={'/products'}>Click me</Link></button></Route>just to simulate home page */}
-        {/* <Navbar /> */}
         <Switch>
           <Route path='/' exact component={Home} />
           <Route path='/About' exact component={About} />
-          <Route path='/Store' exact component={Store} />
+          <Route exact path='/Store'>
+            <Store products={products} totalItems={cart.total_items} />
+          </Route>
           <Route path='/WholeSale' exact component={WholeSale} />
           <Route path='/Contact' exact component={Contact} />
           <Route path='/Login' exact component={Login} />
-          <Route exact path='/'><button><Link to={'/products'}>Store</Link></button></Route>{/* just to simulate home page */}
-          <Route exact path="/products">
-            <Products products={products} onAddToCart={AddToCart} totalItems={cart.total_items} />
-          </Route> {/* totalItems can be props for NavBar in the future */}
+
           <Route exact path="/cart">
             <Cart cart={cart}
               handleCartQty={handleCartQty}
               handleRemoveFromCart={handleRemoveFromCart}
               handleEmptyCart={handleEmptyCart} />
           </Route>
-          <Route exact path="/products/:id">
-            <TowelCollection products={products} />
+
+          <Route exact path="/Store/:id">
+            <TowelCollection onAddToCart={AddToCart} /> {/* link to specific towel */}
           </Route>
+
         </Switch>
       </div>
     </Router >

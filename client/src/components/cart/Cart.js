@@ -9,7 +9,7 @@ function Cart({ cart, handleCartQty, handleRemoveFromCart, handleEmptyCart }) {
         return (
             <div>
                 <h1>You don't have any items in your cart!</h1>
-                <Link to={'/'}>Start Shopping</Link>
+                <Link to={'/Store'}>Start Shopping</Link>
             </div>
         )
     }
