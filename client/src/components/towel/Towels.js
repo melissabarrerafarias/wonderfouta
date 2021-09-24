@@ -1,7 +1,7 @@
 import React from 'react';
 
 function Towel({ product }) {
-
+    // console.log(product)
     return (
             <div id={product.id}>
                 <img src={product.media.source} style={{ maxWidth: '200px' }}></img>

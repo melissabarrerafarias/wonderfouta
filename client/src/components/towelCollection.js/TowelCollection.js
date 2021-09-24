@@ -11,6 +11,12 @@ function TowelCollection({ onAddToCart }) {
 
     const [selectedProduct, setSelectedProduct] = useState({}); // changing onClick to selected image
 
+    const [quantity, setQuantity] = useState('1'); 
+
+    function updateDesiredQuantity(e) {
+        setQuantity(e.target.value)
+    }
+
     const retrieveName = async () => { // name data to set in state
         const product = await commerce.products.retrieve(productId);
         let names = product.variant_groups[0].options;
@@ -19,6 +25,7 @@ function TowelCollection({ onAddToCart }) {
 
     const retrieveProductVariants = async () => { // setting state to specific collection variants 
         const { data } = await commerce.products.getVariants(productId);
+        console.log(data) // in data we find INVENTORY (can be used for later as 'stock')
         setCollection(data);
         setSelectedProduct({ //setting initial image on page load
             img: data[1]?.assets[0].url,
@@ -39,6 +46,7 @@ function TowelCollection({ onAddToCart }) {
         retrieveName();
     }, []) // retrieving data on page load ^
 
+    // console.log(selectedProduct)
     return (
         <div>
             {/* selected towel */}
@@ -46,7 +54,8 @@ function TowelCollection({ onAddToCart }) {
                 <img src={selectedProduct.img}></img>
                 <h3>{selectedProduct.price}</h3>
                 <p dangerouslySetInnerHTML={{ __html: selectedProduct.description }}></p>
-                <button onClick={() => onAddToCart(productId, 1, selectedProduct.id)}>Add to Cart</button>{/*functionality to add to cart */}
+                <input placeholder = "Quantity" value={quantity} onChange={updateDesiredQuantity}></input>
+                <button type = "submit" onClick={() => { onAddToCart(productId, quantity, selectedProduct.id); setQuantity('1') } }>Add to Cart</button>{/*functionality to add to cart */}
             </div>
 
             {/* all towels styles */}
