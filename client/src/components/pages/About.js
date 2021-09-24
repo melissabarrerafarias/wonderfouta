@@ -8,11 +8,13 @@ import AboutText from '../AboutText';
 
 
 
+
 function About() {
     return (
         <>
             <Navbar />
             <Cards />
+            <div></div>
             <h1 classname='AboutTitle'>ABOUT US.</h1>
             <AboutText />
         </>
