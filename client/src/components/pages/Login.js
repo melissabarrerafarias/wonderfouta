@@ -6,8 +6,14 @@ import UserContext from "../../context/UserContext";
 import axios from "axios";
 
 function Login() {
+
+  // token for future authentication
   const [data, setData] = useState({ user: undefined, token: undefined });
+
+  // determine user info before making signUp request
   const [user, setUser] = useState();
+
+  // check for token in local storage, set empty string if none
   const checkToken = async () => {
     try {
       let token = await localStorage.getItem("auth-token");
@@ -20,35 +26,43 @@ function Login() {
     }
   };
 
+
+  // setUser with all values of form as the user types it
   const onChange = async (e) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
+
+  // upon submitting form, get all info from state, tidy it up and make the request to https://localhost:5000/user/signUp
   const getFormInfo = async (e) => {
     try {
-      e.preventDefault();
-      const address = `${user.street}, ${user.city}, ${user.state} ${user.postalCode}`;
-      const officialInfo = {
-        firstName: user.firstName,
-        lastName: user.lastName,
-        email: user.email,
-        address: address,
-        phone: parseInt(user.phone),
-        storeCompany: user.storeCompany,
-        website: user.website,
-        password: user.password,
-      };
-      // console.log(officialInfo);
-      const signUp = await axios.post("user/signUp", officialInfo);
-      console.log(signUp);
+      // e.preventDefault();
+      // const address = `${user.street}, ${user.city}, ${user.state} ${user.postalCode}`;
+      // const officialInfo = {
+      //   firstName: user.firstName,
+      //   lastName: user.lastName,
+      //   email: user.email,
+      //   address: address,
+      //   phone: parseInt(user.phone),
+      //   storeCompany: user.storeCompany,
+      //   website: user.website,
+      //   password: user.password,
+      // };
+      // // console.log(officialInfo);
+      // const signUp = await axios.post("user/signUp", officialInfo);
+      console.log("sign up works");
     } catch (error) {
       console.log(error);
     }
   };
 
+
+  // check for token in local storage on load
   useEffect(() => {
     checkToken();
   }, []);
+
+  
   return (
     <>
       <form onSubmit={getFormInfo}>
