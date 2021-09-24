@@ -14,6 +14,7 @@ import Store from './components/pages/Store';
 import WholeSale from './components/pages/WholeSale';
 import Contact from './components/pages/Contact';
 import Login from './components/pages/Login';
+import Checkout from './components/pages/Checkout';
 
 function App() {
   const [products, setProducts] = useState([]);
@@ -78,6 +79,7 @@ function App() {
           <Route exact path="/Store/:id">
             <TowelCollection onAddToCart={AddToCart} /> {/* link to specific towel */}
           </Route>
+          <Route exact path="/Checkout" component={Checkout}/>
 
         </Switch>
       </div>
