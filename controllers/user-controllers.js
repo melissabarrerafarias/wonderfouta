@@ -24,16 +24,16 @@ module.exports = {
   },
   login: async (req, res) => {
     try {
-      const { username, password } = await req.body;
+      const { storeCompany, password } = await req.body;
       //   console.log(username, email, password);
 
       // if user tries to login with blank fields
-      if (!username || !password) {
+      if (!storeCompany || !password) {
         res.status(400).json({ msg: "All required fields must be entered." });
       }
 
       // look for logged in user by username entered...
-      const user = await db.User.findOne({ username: username });
+      const user = await db.User.findOne({ storeCompany: storeCompany });
 
       // ...send error if not found
       if (!user) {
@@ -55,7 +55,16 @@ module.exports = {
 
       res.json({
         token,
-        user: { id: user.id, username: user.username, email: user.email },
+        user: {
+          id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          address: user.address,
+          phone: user.phone,
+          storeCompany: user.storeCompany,
+          website: user.website,
+        },
       });
     } catch (err) {
       res.status(500).json({ msg: err });
