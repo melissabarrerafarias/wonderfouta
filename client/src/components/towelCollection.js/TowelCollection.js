@@ -68,12 +68,22 @@ function TowelCollection({ onAddToCart }) {
             <div>
                 <img src={selectedProduct.img}></img>
                 <h3>{selectedProduct.price}</h3>
+
                 {outOfStock && <EmptyStock />}
+
                 {isLowStock && <LowStock />}
+
                 <p dangerouslySetInnerHTML={{ __html: selectedProduct.description }}></p>
-                <input max={selectedProduct.stock} placeholder='Qty' value={quantity} onChange={updateDesiredQuantity} ></input>
+
+                {quantity > selectedProduct.stock && 
+                <p style={{ color: 'red' }}>Sorry! We only have {selectedProduct.stock} of these items in stock!</p>
+                } {/* message if user tries to put too many towels */}
+
+                <input max={selectedProduct.stock} placeholder='Qty' value={quantity} onChange={updateDesiredQuantity}></input>
+
                 {(selectedProduct.stock > 0 && quantity <= selectedProduct.stock)
-                    && <button type="submit" onClick={() => { onAddToCart(productId, quantity, selectedProduct.id); setQuantity('1') }}>Add to Cart</button>}
+                    && <button type="submit" onClick={() => { onAddToCart(productId, quantity, selectedProduct.id); setQuantity('1') }}>Add to Cart</button>
+                } 
             </div>
 
             {/* all towels styles */}
