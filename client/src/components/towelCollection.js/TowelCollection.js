@@ -4,14 +4,12 @@ import { commerce } from '../../lib/commerce';
 
 function TowelCollection({ onAddToCart }) {
     const { id: productId } = useParams(); // id = productId (from parameters)
-
     const [collection, setCollection] = useState([]); // all data
-
     const [towelNames, setTowelNames] = useState([]); // name/color data (comes in different response that rest of data ^)
-
     const [selectedProduct, setSelectedProduct] = useState({}); // changing onClick to selected image
-
     const [quantity, setQuantity] = useState('1');
+    const outOfStock = selectedProduct.stock == 0; // check to see if inventory is empty
+    const isLowStock = selectedProduct.stock < 3 && selectedProduct.stock > 0; // check to see if inventory is less than 3 but more than 0
 
     function updateDesiredQuantity(e) {
         setQuantity(e.target.value);
@@ -27,11 +25,13 @@ function TowelCollection({ onAddToCart }) {
         const { data } = await commerce.products.getVariants(productId);
         // console.log(data) // in data we find INVENTORY (can be used for later as 'stock')
         setCollection(data);
+        console.log(data)
         setSelectedProduct({ //setting initial image on page load
             img: data[1]?.assets[0].url,
             id: data[1]?.id,
             description: data[1]?.description,
-            price: data[1].price?.formatted_with_symbol
+            price: data[1].price?.formatted_with_symbol, 
+            stock: data[1]?.inventory
         })
     }
 
@@ -40,9 +40,6 @@ function TowelCollection({ onAddToCart }) {
             { img: e.target.src, id: e.target.id, description: e.target.dataset.description, price: e.target.dataset.price, stock: e.target.dataset.stock }
         )
     }
-
-    const outOfStock = selectedProduct.stock == 0;
-    const isLowStock = selectedProduct.stock < 3 && selectedProduct.stock > 0;
 
     const LowStock = () => {
         return (
@@ -74,8 +71,10 @@ function TowelCollection({ onAddToCart }) {
                 {outOfStock && <EmptyStock />}
                 {isLowStock && <LowStock />}
                 <p dangerouslySetInnerHTML={{ __html: selectedProduct.description }}></p>
-                <input placeholder="Quantity" value={quantity} onChange={updateDesiredQuantity}></input>
-                <button type="submit" onClick={() => { onAddToCart(productId, quantity, selectedProduct.id); setQuantity('1') }}>Add to Cart</button>{/*functionality to add to cart */}
+                <input type="number" placeholder="Quantity" value={quantity} onChange={updateDesiredQuantity}></input>
+                {selectedProduct.stock > 0 &&
+                    <button type="submit" onClick={() => { onAddToCart(productId, quantity, selectedProduct.id); setQuantity('1') }}>Add to Cart</button>
+                } {/*functionality to add to cart */}
             </div>
 
             {/* all towels styles */}
