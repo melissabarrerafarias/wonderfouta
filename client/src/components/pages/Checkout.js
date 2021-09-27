@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import Stripe from "stripe";
+
+const stripe = Stripe('pk_test_TYooMQauvdEDq54NiTphI7jx');
 
 const Checkout = (props) => {
   const [items, setItems] = useState();
@@ -81,6 +84,9 @@ const Checkout = (props) => {
 
         <input type="submit" value="Submit" />
       </form>
+
+
+
     </div>
   );
 };
