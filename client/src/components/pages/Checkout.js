@@ -1,17 +1,23 @@
 import React, { useEffect, useState } from "react";
 
 const Checkout = (props) => {
-  const [items, setItems] = useState({});
+  const [items, setItems] = useState();
+  const [total, setTotal] = useState();
   const [address, setAddress] = useState();
 
   const getProducts = () => {
     const subtotal = props.location.state.subtotal.raw;
-    const itemsArr = props.location.state.line_items;
-    itemsArr.forEach((item) => {
-      console.log(item);
-    });
+    const allItems = props.location.state.line_items;
+    setTotal(subtotal);
+    setItems(allItems);
+  };
 
-    console.log(subtotal, items);
+  const onChange = (e) => {
+    setAddress({ ...address, [e.target.name]: e.target.value });
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
   };
 
   useEffect(() => {
@@ -22,33 +28,54 @@ const Checkout = (props) => {
     <div>
       <h1>This is checkout</h1>
 
-      <form>
+      <form
+        onSubmit={(e) => {
+          onSubmit(e);
+        }}
+      >
         <ul>
           <label>
             First Name:
-            <input type="text" name="fistName" />
+            <input onChange={onChange} type="text" name="firstName" required />
           </label>
         </ul>
         <ul>
           <label>
             Last Name:
-            <input type="text" name="lastName" />
-          </label>
-        </ul>
-        <ul>
-          <label>
-            Contact:
-            <input type="email" name="email" placeholder="email" />
-            <input type="tel" name="phone" placeholder="phone" />
+            <input onChange={onChange} type="text" name="lastName" required />
           </label>
         </ul>
         <ul>
           <label>
             Shipping Address:
-            <input type="text" name="street" placeholder="street" />
-            <input type="text" name="city" placeholder="city" />
-            <input type="text" name="state" placeholder="state" />
-            <input type="text" name="postalCode" placeholder="postalCode" />
+            <input
+              onChange={onChange}
+              type="text"
+              name="street"
+              placeholder="street"
+              required
+            />
+            <input
+              onChange={onChange}
+              type="text"
+              name="city"
+              placeholder="city"
+              required
+            />
+            <input
+              onChange={onChange}
+              type="text"
+              name="state"
+              placeholder="state"
+              required
+            />
+            <input
+              onChange={onChange}
+              type="text"
+              name="postalCode"
+              placeholder="postalCode"
+              required
+            />
           </label>
         </ul>
 
