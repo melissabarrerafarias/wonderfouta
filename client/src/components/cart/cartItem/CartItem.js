@@ -3,6 +3,18 @@ import React, { useState, useEffect } from 'react';
 
 function CartItem({ item, onUpdateCartQty, onRemoveFromCart }) {
     const itemInventory = item.variant.inventory;
+    
+    const [disabled, setDisabled] = useState(false); 
+
+    function checkQty() {
+        if (itemInventory <= item.quantity) {
+            setDisabled(true)
+        }
+    }
+
+    useEffect(() => {
+        checkQty();
+    }, [])
 
     return (
         <div>
@@ -14,9 +26,7 @@ function CartItem({ item, onUpdateCartQty, onRemoveFromCart }) {
             <div>
                 <button type="button" onClick={() => onUpdateCartQty(item.id, item.quantity - 1)}>-</button>
                 <p>{item.quantity}</p>
-                {itemInventory > item.quantity &&
-                    <button type="button" onClick={() => onUpdateCartQty(item.id, item.quantity + 1)} >+</button>
-                }
+                <button disabled={disabled} type="button" onClick={() => onUpdateCartQty(item.id, item.quantity + 1)} >+</button>
             </div>
             <button type="button" onClick={() => onRemoveFromCart(item.id)}>Remove</button>
         </div>
