@@ -14,7 +14,7 @@ function TowelCollection({ onAddToCart }) {
     const [quantity, setQuantity] = useState('1');
 
     function updateDesiredQuantity(e) {
-        setQuantity(e.target.value)
+        setQuantity(e.target.value);
     }
 
     const retrieveName = async () => { // name data to set in state
@@ -41,32 +41,38 @@ function TowelCollection({ onAddToCart }) {
         )
     }
 
+    const outOfStock = selectedProduct.stock == 0;
+    const isLowStock = selectedProduct.stock < 3 && selectedProduct.stock > 0;
+
+    const LowStock = () => {
+        return (
+            <div>
+                <p style={{ color: 'red' }}>Only {selectedProduct.stock} left in stock!</p>
+            </div>
+        )
+    }
+    const EmptyStock = () => {
+        return (
+            <div>
+                <p style={{ color: 'red' }}>Out of stock!</p>
+            </div>
+        )
+    }
+
     useEffect(() => {
         retrieveProductVariants();
         retrieveName();
     }, []) // retrieving data on page load ^
 
     console.log(selectedProduct)
-
-    // const LowStock = () => {
-    //     if (selectedProduct.stock < 3) {
-    //         return (
-
-    //         )
-    //     }
-    // }
-
     return (
         <div>
             {/* selected towel */}
             <div>
                 <img src={selectedProduct.img}></img>
                 <h3>{selectedProduct.price}</h3>
-                {selectedProduct.stock < 3 &&
-                    <div>
-                        <p>Only {selectedProduct.stock} left in stock!</p>
-                    </div>
-                }
+                {outOfStock && <EmptyStock />}
+                {isLowStock && <LowStock />}
                 <p dangerouslySetInnerHTML={{ __html: selectedProduct.description }}></p>
                 <input placeholder="Quantity" value={quantity} onChange={updateDesiredQuantity}></input>
                 <button type="submit" onClick={() => { onAddToCart(productId, quantity, selectedProduct.id); setQuantity('1') }}>Add to Cart</button>{/*functionality to add to cart */}
