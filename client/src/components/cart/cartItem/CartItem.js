@@ -1,6 +1,7 @@
 import React from 'react';
 
 function CartItem({ item, onUpdateCartQty, onRemoveFromCart }) {
+    console.log(item)
     return (
         <div>
             <img style={{ maxWidth: '200px' }} src={item?.variant.assets[0].url}></img> {/* item image optional */}

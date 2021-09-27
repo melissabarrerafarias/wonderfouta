@@ -12,7 +12,7 @@ function TowelCollection({ onAddToCart }) {
     const isLowStock = selectedProduct.stock < 3 && selectedProduct.stock > 0; // check to see if inventory is less than 3 but more than 0
 
     function updateDesiredQuantity(e) {
-        setQuantity(e.target.value);
+        setQuantity(e.target.value)
     }
 
     const retrieveName = async () => { // name data to set in state
@@ -30,7 +30,7 @@ function TowelCollection({ onAddToCart }) {
             img: data[1]?.assets[0].url,
             id: data[1]?.id,
             description: data[1]?.description,
-            price: data[1].price?.formatted_with_symbol, 
+            price: data[1].price?.formatted_with_symbol,
             stock: data[1]?.inventory
         })
     }
@@ -71,10 +71,9 @@ function TowelCollection({ onAddToCart }) {
                 {outOfStock && <EmptyStock />}
                 {isLowStock && <LowStock />}
                 <p dangerouslySetInnerHTML={{ __html: selectedProduct.description }}></p>
-                <input type="number" placeholder="Quantity" value={quantity} onChange={updateDesiredQuantity}></input>
-                {selectedProduct.stock > 0 &&
-                    <button type="submit" onClick={() => { onAddToCart(productId, quantity, selectedProduct.id); setQuantity('1') }}>Add to Cart</button>
-                } {/*functionality to add to cart */}
+                <input max={selectedProduct.stock} placeholder='Qty' value={quantity} onChange={updateDesiredQuantity} ></input>
+                {(selectedProduct.stock > 0 && quantity <= selectedProduct.stock)
+                    && <button type="submit" onClick={() => { onAddToCart(productId, quantity, selectedProduct.id); setQuantity('1') }}>Add to Cart</button>}
             </div>
 
             {/* all towels styles */}
