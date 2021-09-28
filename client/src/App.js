@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import { commerce } from './lib/commerce';
 
+
 // components and pages 
 // import Products from './components/products/Products';
 import Cart from './components/cart/Cart';
 import TowelCollection from './components/towelCollection.js/TowelCollection';
-
 import './App.css';
 import Home from './components/pages/Home'
 import About from './components/pages/About';

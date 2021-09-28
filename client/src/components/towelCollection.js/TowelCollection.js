@@ -66,7 +66,7 @@ function TowelCollection({ onAddToCart }) {
         <div>
             {/* selected towel */}
             <div>
-                <img src={selectedProduct.img}></img>
+                <img src={selectedProduct.img}></img> 
                 <h3>{selectedProduct.price}</h3>
 
                 {outOfStock && <EmptyStock />}

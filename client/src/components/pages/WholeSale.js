@@ -2,16 +2,15 @@ import React from 'react';
 import '../../App.css';
 import Footer from '../Footer';
 import Navbar from '../Navbar';
+import ContactForm from '../ContactForm';
 
 
 
 function WholeSale() {
     return (
         <>
-            <h1>Whole Sale
-            Blash blhaashjadsdads
-            </h1>
             <Navbar />
+            <ContactForm />
             <Footer />
         </>
     );
