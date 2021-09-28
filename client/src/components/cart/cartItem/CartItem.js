@@ -15,12 +15,12 @@ function CartItem({ item, onUpdateCartQty, onRemoveFromCart }) {
     useEffect(() => {
         checkQty();
     }, [])
-
+    
     return (
         <div>
             <img style={{ maxWidth: '200px' }} src={item?.variant.assets[0].url}></img> {/* item image optional */}
             <div>
-                <h1>{item.name}</h1>
+                <a href={`/Store/${item?.product_id}`}>{item.name}</a>
                 <h2>{item.line_total?.formatted_with_symbol}</h2> {/* item price */}
             </div>
             <div>

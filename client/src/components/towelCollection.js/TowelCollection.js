@@ -61,8 +61,6 @@ function TowelCollection({ onAddToCart }) {
         retrieveName();
     }, []) // retrieving data on page load ^
 
-    console.log(quantity)
-    console.log(selectedProduct.stock)
     // console.log(collection)
     return (
         <div>
