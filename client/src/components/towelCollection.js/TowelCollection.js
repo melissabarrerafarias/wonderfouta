@@ -25,7 +25,6 @@ function TowelCollection({ onAddToCart }) {
         const { data } = await commerce.products.getVariants(productId);
         // console.log(data) // in data we find INVENTORY (can be used for later as 'stock')
         setCollection(data);
-        console.log(data)
         setSelectedProduct({ //setting initial image on page load
             img: data[1]?.assets[0].url,
             id: data[1]?.id,
@@ -36,8 +35,9 @@ function TowelCollection({ onAddToCart }) {
     }
 
     const displaySingleProduct = async (e) => { // setting selected product state to selected product
+        const stockNum = parseInt(e.target.dataset.stock); // need to make number integer to compare properly
         setSelectedProduct(
-            { img: e.target.src, id: e.target.id, description: e.target.dataset.description, price: e.target.dataset.price, stock: e.target.dataset.stock }
+            { img: e.target.src, id: e.target.id, description: e.target.dataset.description, price: e.target.dataset.price, stock: stockNum }
         )
     }
 
@@ -61,7 +61,9 @@ function TowelCollection({ onAddToCart }) {
         retrieveName();
     }, []) // retrieving data on page load ^
 
-    console.log(selectedProduct)
+    console.log(quantity)
+    console.log(selectedProduct.stock)
+    // console.log(collection)
     return (
         <div>
             {/* selected towel */}
@@ -75,7 +77,7 @@ function TowelCollection({ onAddToCart }) {
 
                 <p dangerouslySetInnerHTML={{ __html: selectedProduct.description }}></p>
 
-                {quantity > selectedProduct.stock && 
+                {quantity > selectedProduct.stock && selectedProduct.stock > 0 &&
                 <p style={{ color: 'red' }}>Sorry! We only have {selectedProduct.stock} of these items in stock!</p>
                 } {/* message if user tries to put too many towels */}
 
