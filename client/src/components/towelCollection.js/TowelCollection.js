@@ -78,10 +78,10 @@ function TowelCollection({ onAddToCart }) {
                 <p dangerouslySetInnerHTML={{ __html: selectedProduct.description }}></p>
 
                 {quantity > selectedProduct.stock && selectedProduct.stock > 0 &&
-                <p style={{ color: 'red' }}>Sorry! We only have {selectedProduct.stock} of these items in stock!</p>
+                <p style={{ color: 'red' }}>Sorry! We only have {selectedProduct.stock} available!</p>
                 } {/* message if user tries to put too many towels */}
 
-                <input max={selectedProduct.stock} placeholder='Qty' value={quantity} onChange={updateDesiredQuantity}></input>
+                <input type="number" min="1" max={selectedProduct.stock} placeholder='Qty' value={quantity} onChange={updateDesiredQuantity}></input>
 
                 {(selectedProduct.stock > 0 && quantity <= selectedProduct.stock)
                     && <button type="submit" onClick={() => { onAddToCart(productId, quantity, selectedProduct.id); setQuantity('1') }}>Add to Cart</button>
