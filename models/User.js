@@ -4,15 +4,23 @@ module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define(
     "User",
     {
-      username: {
+      firstName: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notNull: {
-            msg: "Please enter your name",
+            msg: "Please enter your first name",
           },
         },
-        unique: true,
+      },
+      lastName: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Please enter your last name",
+          },
+        },
       },
       email: {
         type: DataTypes.STRING,
@@ -21,9 +29,45 @@ module.exports = (sequelize, DataTypes) => {
           notNull: {
             msg: "Please enter your email",
           },
-          isEmail: true,
+          isEmail: {
+            msg: "Please enter a valid email (ex. JaneDoe@domain.com)",
+          },
         },
         unique: true,
+      },
+      address: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Please enter all fields",
+          },
+        },
+      },
+      phone: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          isNumeric: true,
+          notNull: {
+            msg: "Please enter a phone number including 3 digit area code",
+          },
+        },
+      },
+      storeCompany: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Please include your store or company name",
+          },
+        },
+      },
+      website: {
+        type: DataTypes.STRING,
+        validate: {
+          isUrl: { msg: "Please enter a valid url (ex: https://Google.com)" },
+        },
       },
       password: {
         type: DataTypes.STRING,
