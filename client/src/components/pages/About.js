@@ -3,6 +3,8 @@ import { React } from 'react';
 import '../../App.css'
 import Navbar from '../Navbar';
 import Cards from '../Cards';
+import AboutText from '../AboutText';
+
 
 
 
@@ -12,8 +14,9 @@ function About() {
         <>
             <Navbar />
             <Cards />
-            <h1>ABOUT US.</h1>
-            <h1>Text About Us.</h1>
+            <div></div>
+            <h1 classname='AboutTitle'>ABOUT US.</h1>
+            <AboutText />
         </>
     )
 }

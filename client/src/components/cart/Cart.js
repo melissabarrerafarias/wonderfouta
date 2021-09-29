@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import Checkout from "../pages/Checkout";
 import CartItem from "./cartItem/CartItem";
 
 function Cart({ cart, handleCartQty, handleRemoveFromCart, handleEmptyCart }) {
@@ -15,36 +14,28 @@ function Cart({ cart, handleCartQty, handleRemoveFromCart, handleEmptyCart }) {
     );
   };
 
-  const FilledCart = () => {
-    return (
-      <div>
-        {cart.line_items.map((item) => (
-          <div key={item.id}>
-            <CartItem
-              item={item}
-              onUpdateCartQty={handleCartQty}
-              onRemoveFromCart={handleRemoveFromCart}
-            />
-          </div>
-        ))}
-        <div>
-          <h1>Subtotal: {cart.subtotal.formatted_with_symbol}</h1>
-        </div>
-        <div>
-          <button onClick={handleEmptyCart}>Empty Cart</button>
-          <button>
-            <Link to={"/Checkout"}>Checkout</Link>
-          </button>
-        </div>
-      </div>
-    );
-  };
 
-  // if (!cart.line_items) {
-  //     return (
-  //         <div>Loading...</div>
-  //     )
-  // }
+
+    const FilledCart = () => {
+        return (
+            <div>
+                {cart.line_items.map((item) => (
+                    <div key={item.id}>
+                        <CartItem item={item} onUpdateCartQty={handleCartQty} onRemoveFromCart={handleRemoveFromCart} />
+                    </div>
+                ))}
+                <div>
+                    <h1>Subtotal: {cart.subtotal.formatted_with_symbol}</h1>
+                </div>
+                <div>
+                    <button onClick={handleEmptyCart}>Empty Cart</button>
+                    <button><Link to={'/Checkout'}>Checkout</Link></button>
+                </div>
+            </div>
+        )
+    }
+
+  
 
   return (
     <div>
