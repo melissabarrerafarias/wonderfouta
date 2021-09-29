@@ -33,12 +33,6 @@ function Cart({ cart, handleCartQty, handleRemoveFromCart, handleEmptyCart }) {
         )
     }
 
-    // if (!cart.line_items) {
-    //     return (
-    //         <div>Loading...</div>
-    //     )
-    // }
-
     return (
         <div>
             <h1>Your Cart</h1>
