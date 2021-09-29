@@ -33,7 +33,7 @@ function Cart({ cart, handleCartQty, handleRemoveFromCart, handleEmptyCart }) {
         <div>
           <button onClick={handleEmptyCart}>Empty Cart</button>
           <button>
-            <Link to={{ pathname: "/Checkout", state: cart }}>Checkout</Link>
+            <Link to={"/Checkout"}>Checkout</Link>
           </button>
         </div>
       </div>

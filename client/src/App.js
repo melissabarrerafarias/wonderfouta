@@ -16,7 +16,7 @@ import Store from "./components/pages/Store";
 import WholeSale from "./components/pages/WholeSale";
 import Contact from "./components/pages/Contact";
 import Login from "./components/pages/Login";
-import Checkout from "./components/pages/Checkout";
+import Checkout from "./components/checkoutForm/Checkout/Checkout";
 
 function App() {
   const stripePromise = loadStripe(
@@ -93,7 +93,7 @@ function App() {
               <TowelCollection onAddToCart={AddToCart} />{" "}
               {/* link to specific towel */}
             </Route>
-            <Route exact path="/Checkout" component={Checkout} />
+            <Route exact path="/Checkout" component={Checkout} cart={cart}/>
           </Switch>
         </div>
       </Router>

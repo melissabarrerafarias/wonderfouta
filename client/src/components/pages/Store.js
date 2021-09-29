@@ -9,6 +9,7 @@ import Towel from '../towel/Towels';
 
 
 function Store({ products, totalItems }) {
+    console.log(products)
     return (
         <>
             <main>
