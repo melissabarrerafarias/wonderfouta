@@ -8,12 +8,14 @@ import {
 import { loadStripe } from "@stripe/stripe-js";
 import { commerce } from "../../../lib/commerce";
 import Review from "../Review";
+import PaymentForm from "../PaymentForm";
 
-const Checkout = ({ cart }) => {
+const Checkout = ({cart}) => {
   //   const [items, setItems] = useState();
   //   const [total, setTotal] = useState();
   //   const [address, setAddress] = useState();
   const [checkoutToken, setCheckoutToken] = useState(null);
+  const [payment, goToPayment] = useState(false);
 
   //   const getProducts = () => {
   //     const subtotal = props.location.state.subtotal.raw;
@@ -27,85 +29,98 @@ const Checkout = ({ cart }) => {
   };
 
   const onSubmit = async (e) => {
-    console.log("submit");
+    e.preventDefault();
+    goToPayment(true);
+  };
+
+  const generateToken = async () => {
+    try {
+      const token = await commerce.checkout.generateToken(cart.id, {
+        type: "cart",
+      });
+      setCheckoutToken(token);
+    } catch (error) {
+      console.log("token failed");
+    }
   };
 
   useEffect(() => {
     // getProducts();
+    
   }, []);
 
   useEffect(() => {
-    const generateToken = async () => {
-      try {
-        const token = commerce.checkout.generateToken(cart?.id, {
-          type: "cart",
-        });
-        setCheckoutToken(token);
-      } catch (error) {}
-    };
     generateToken();
   }, []);
 
+  const shippingDetails = () => {
+    return (
+      <div>
+        <h1>This is checkout!</h1>
+        <form
+          onSubmit={(e) => {
+            onSubmit(e);
+          }}
+        >
+          <ul>
+            <label>
+              First Name:
+              <input
+                onChange={onChange}
+                type="text"
+                name="firstName"
+                required
+              />
+            </label>
+          </ul>
+          <ul>
+            <label>
+              Last Name:
+              <input onChange={onChange} type="text" name="lastName" required />
+            </label>
+          </ul>
+          <ul>
+            <label>
+              Shipping Address:
+              <input
+                onChange={onChange}
+                type="text"
+                name="street"
+                placeholder="street"
+                required
+              />
+              <input
+                onChange={onChange}
+                type="text"
+                name="city"
+                placeholder="city"
+                required
+              />
+              <input
+                onChange={onChange}
+                type="text"
+                name="state"
+                placeholder="state"
+                required
+              />
+              <input
+                onChange={onChange}
+                type="text"
+                name="postalCode"
+                placeholder="postalCode"
+                required
+              />
+            </label>
+          </ul>
+
+          <button type="submit">Go to Payment</button>
+        </form>
+      </div>
+    );
+  };
+
   return (
-    <div>
-      <h1>This is checkout!</h1>
-
-      <Review />
-
-      <form
-        onSubmit={(e) => {
-          onSubmit(e);
-        }}
-      >
-        <ul>
-          <label>
-            First Name:
-            <input onChange={onChange} type="text" name="firstName" required />
-          </label>
-        </ul>
-        <ul>
-          <label>
-            Last Name:
-            <input onChange={onChange} type="text" name="lastName" required />
-          </label>
-        </ul>
-        <ul>
-          <label>
-            Shipping Address:
-            <input
-              onChange={onChange}
-              type="text"
-              name="street"
-              placeholder="street"
-              required
-            />
-            <input
-              onChange={onChange}
-              type="text"
-              name="city"
-              placeholder="city"
-              required
-            />
-            <input
-              onChange={onChange}
-              type="text"
-              name="state"
-              placeholder="state"
-              required
-            />
-            <input
-              onChange={onChange}
-              type="text"
-              name="postalCode"
-              placeholder="postalCode"
-              required
-            />
-          </label>
-        </ul>
-
-        <button type="submit">Pay</button>
-      </form>
-    </div>
+    <>{!payment ? shippingDetails() : <PaymentForm checkoutToken={checkoutToken} />}</>
   );
 };
 

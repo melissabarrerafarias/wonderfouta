@@ -1,9 +1,11 @@
 import React from 'react'
 
-const Review = () => {
+const Review = ({checkoutToken}) => {
+
+    console.log(checkoutToken)
     return (
         <div>
-            
+            <li>Hello</li>
         </div>
     )
 }
