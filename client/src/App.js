@@ -23,6 +23,7 @@ function App() {
   const stripePromise = loadStripe(
     "pk_test_51JeNXVIQMsLPZVRp4E9Qil9vKWTeJhX7Jf5UjP6YobbsZOyj5Sqxi59C3CKvr16KZNafSn0n3z6fNNiWyzDCr1wZ0001hWkjGw"
   );
+  console.log(stripePromise)
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
 
@@ -69,6 +70,7 @@ function App() {
 
   return (
     <Elements stripe={stripePromise}>
+      
       <Router>
         <div>
           <Switch>
@@ -95,7 +97,8 @@ function App() {
               {/* link to specific towel */}
             </Route>
             <Route exact path="/Checkout">
-              <Checkout items={cart} />
+
+              <Checkout items={cart}/>
             </Route>
           </Switch>
         </div>

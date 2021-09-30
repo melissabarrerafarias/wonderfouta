@@ -16,7 +16,6 @@ const Checkout = (props) => {
   //   const [address, setAddress] = useState();
   const [checkoutToken, setCheckoutToken] = useState(null);
   const [payment, goToPayment] = useState(false);
-
   //   const getProducts = () => {
   //     const subtotal = props.location.state.subtotal.raw;
   //     const allItems = props.location.state.line_items;
@@ -118,6 +117,7 @@ const Checkout = (props) => {
       {!payment ? (
         shippingDetails()
       ) : (
+
         <PaymentForm checkoutToken={checkoutToken} />
       )}
     </>
