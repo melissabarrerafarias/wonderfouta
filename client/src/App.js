@@ -94,8 +94,8 @@ function App() {
               <TowelCollection onAddToCart={AddToCart} />{" "}
               {/* link to specific towel */}
             </Route>
-            <Route exact path="/Checkout" component={Checkout}>
-              <Checkout cart={cart} />
+            <Route exact path="/Checkout">
+              <Checkout items={cart} />
             </Route>
           </Switch>
         </div>

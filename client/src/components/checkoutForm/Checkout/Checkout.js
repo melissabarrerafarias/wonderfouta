@@ -10,7 +10,7 @@ import { commerce } from "../../../lib/commerce";
 import Review from "../Review";
 import PaymentForm from "../PaymentForm";
 
-const Checkout = ({cart}) => {
+const Checkout = (props) => {
   //   const [items, setItems] = useState();
   //   const [total, setTotal] = useState();
   //   const [address, setAddress] = useState();
@@ -33,25 +33,19 @@ const Checkout = ({cart}) => {
     goToPayment(true);
   };
 
-  const generateToken = async () => {
-    try {
-      const token = await commerce.checkout.generateToken(cart.id, {
-        type: "cart",
-      });
-      setCheckoutToken(token);
-    } catch (error) {
-      console.log("token failed");
-    }
-  };
-
   useEffect(() => {
-    // getProducts();
-    
-  }, []);
-
-  useEffect(() => {
+    const generateToken = async () => {
+      try {
+        const token = await commerce.checkout.generateToken(props?.items?.id, {
+          type: "cart",
+        });
+        setCheckoutToken(token);
+      } catch (error) {
+        console.log("token failed");
+      }
+    };
     generateToken();
-  }, []);
+  }, [props.items]);
 
   const shippingDetails = () => {
     return (
@@ -120,7 +114,13 @@ const Checkout = ({cart}) => {
   };
 
   return (
-    <>{!payment ? shippingDetails() : <PaymentForm checkoutToken={checkoutToken} />}</>
+    <>
+      {!payment ? (
+        shippingDetails()
+      ) : (
+        <PaymentForm checkoutToken={checkoutToken} />
+      )}
+    </>
   );
 };
 
