@@ -11,6 +11,7 @@ import Review from "../Review";
 import PaymentForm from "../PaymentForm";
 
 const Checkout = (props) => {
+  console.log(props)
   //   const [items, setItems] = useState();
   //   const [total, setTotal] = useState();
   //   const [address, setAddress] = useState();
@@ -117,8 +118,10 @@ const Checkout = (props) => {
       {!payment ? (
         shippingDetails()
       ) : (
-
-        <PaymentForm checkoutToken={checkoutToken} />
+        <PaymentForm
+          checkoutToken={checkoutToken}
+          handleOnCaptureCheckout={props.onCaptureCheckout}
+        />
       )}
     </>
   );

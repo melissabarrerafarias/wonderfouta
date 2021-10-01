@@ -23,9 +23,11 @@ function App() {
   const stripePromise = loadStripe(
     "pk_test_51JeNXVIQMsLPZVRp4E9Qil9vKWTeJhX7Jf5UjP6YobbsZOyj5Sqxi59C3CKvr16KZNafSn0n3z6fNNiWyzDCr1wZ0001hWkjGw"
   );
-  console.log(stripePromise)
+  console.log(stripePromise);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
+  const [order, setOrder] = useState({});
+  const [error, setError] = useState("");
 
   const fetchProducts = async () => {
     // get product list from commerce js and set state
@@ -63,6 +65,24 @@ function App() {
     setCart(emptyCart);
   };
 
+  const refreshCart = async () => {
+    const newCart = await commerce.cart.refresh();
+    setCart(newCart);
+  };
+
+  const handleRetailCheckout = async (checkoutTokenId, newOrder) => {
+    try {
+      const incomingOrder = await commerce.checkout.capture(
+        checkoutTokenId,
+        newOrder
+      );
+      setOrder(incomingOrder);
+      refreshCart();
+    } catch (error) {
+      setError(error.data.error.message);
+    }
+  };
+
   useEffect(() => {
     fetchProducts();
     fetchCart();
@@ -70,7 +90,6 @@ function App() {
 
   return (
     <Elements stripe={stripePromise}>
-      
       <Router>
         <div>
           <Switch>
@@ -97,8 +116,12 @@ function App() {
               {/* link to specific towel */}
             </Route>
             <Route exact path="/Checkout">
-
-              <Checkout items={cart}/>
+              <Checkout
+                items={cart}
+                order={order}
+                onCaptureCheckout={handleRetailCheckout}
+                error={error}
+              />
             </Route>
           </Switch>
         </div>
