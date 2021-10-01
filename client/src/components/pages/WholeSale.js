@@ -11,6 +11,7 @@ function WholeSale() {
         <>
             <Navbar />
             <ContactForm />
+            
             <Footer />
         </>
     );

@@ -6,6 +6,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use("/user", require("./routes/userRoutes"));
+app.use("/payment", require("./routes/paymentRoutes"))
 
 const db = require("./models");
 
