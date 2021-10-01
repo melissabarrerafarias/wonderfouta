@@ -2,13 +2,13 @@ import React, { useEffect, useState } from "react";
 import "../../App.css";
 import Footer from "../Footer";
 import Navbar from "../Navbar";
-import UserContext from "../../context/UserContext";
+// import UserContext from "../../context/UserContext";
 import axios from "axios";
 
 function Register() {
 
   // token for future authentication
-  const [data, setData] = useState({ user: undefined, token: undefined });
+//   const [data, setData] = useState({ user: undefined, token: undefined });
 
   // determine user info before making signUp request
   const [user, setUser] = useState();
@@ -36,21 +36,21 @@ function Register() {
   // upon submitting form, get all info from state, tidy it up and make the request to https://localhost:5000/user/signUp
   const getFormInfo = async (e) => {
     try {
-      // e.preventDefault();
-      // const address = `${user.street}, ${user.city}, ${user.state} ${user.postalCode}`;
-      // const officialInfo = {
-      //   firstName: user.firstName,
-      //   lastName: user.lastName,
-      //   email: user.email,
-      //   address: address,
-      //   phone: parseInt(user.phone),
-      //   storeCompany: user.storeCompany,
-      //   website: user.website,
-      //   password: user.password,
-      // };
-      // // console.log(officialInfo);
-      // const signUp = await axios.post("user/signUp", officialInfo);
-      console.log("sign up works");
+      e.preventDefault();
+      const address = `${user.street}, ${user.city}, ${user.state} ${user.postalCode}`;
+      const officialInfo = {
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        address: address,
+        phone: parseInt(user.phone),
+        storeCompany: user.storeCompany,
+        website: user.website,
+        password: user.password,
+      };
+      // console.log(officialInfo);
+      const signUp = await axios.post("user/signUp", officialInfo);
+      console.log(signUp);
     } catch (error) {
       console.log(error);
     }

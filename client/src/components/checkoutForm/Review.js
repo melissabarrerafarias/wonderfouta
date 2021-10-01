@@ -1,7 +1,6 @@
 import React from "react";
 
 const Review = ({ checkoutToken }) => {
-  console.log(checkoutToken);
   return (
     <>
       <ul>

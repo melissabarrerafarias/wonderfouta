@@ -1,20 +1,19 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import {
-  Elements,
-  CardElement,
-  ElementsConsumer,
-  useStripe,
-  useElements,
-} from "@stripe/react-stripe-js";
+import { CardElement, useStripe, useElements } from "@stripe/react-stripe-js";
 
 import Review from "./Review";
 import Confirmation from "./Confirmation";
-const PaymentForm = ({ checkoutToken, handleOnCaptureCheckout, order, error }) => {
+const PaymentForm = ({
+  checkoutToken,
+  handleOnCaptureCheckout,
+  order,
+  error,
+}) => {
   const stripe = useStripe();
   const elements = useElements();
   const [confirmed, setConfirmed] = useState(false);
-  console.log(order)
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -22,16 +21,16 @@ const PaymentForm = ({ checkoutToken, handleOnCaptureCheckout, order, error }) =
     if (!stripe || !elements) return;
 
     const cardElement = elements.getElement(CardElement);
-    
+
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: cardElement,
     });
 
-    // console.log(paymentMethod.id)
+
 
     if (error) {
-      console.log(error);
+      console.log("error creating stripe payment method");
     } else {
       const orderData = {
         line_items: checkoutToken.live.line_items,
@@ -86,7 +85,15 @@ const PaymentForm = ({ checkoutToken, handleOnCaptureCheckout, order, error }) =
     );
   };
 
-  return <>{!confirmed ? paymentForm() : <Confirmation order={order} error={error}/>}</>;
+  return (
+    <>
+      {!confirmed ? (
+        paymentForm()
+      ) : (
+        <Confirmation order={order} error={error} />
+      )}
+    </>
+  );
 };
 
 export default PaymentForm;

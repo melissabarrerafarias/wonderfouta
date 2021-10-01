@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { commerce } from "./lib/commerce";
 import { Elements } from "@stripe/react-stripe-js";
 import { loadStripe } from "@stripe/stripe-js";
@@ -17,13 +17,11 @@ import WholeSale from "./components/pages/WholeSale";
 import Contact from "./components/pages/Contact";
 import Login from "./components/pages/Login";
 import Checkout from "./components/checkoutForm/Checkout/Checkout";
-import PaymentForm from "./components/checkoutForm/PaymentForm";
 
 function App() {
   const stripePromise = loadStripe(
   process.env.REACT_APP_STRIPE_KEY
   );
-  console.log(stripePromise);
   const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({});
   const [order, setOrder] = useState({});

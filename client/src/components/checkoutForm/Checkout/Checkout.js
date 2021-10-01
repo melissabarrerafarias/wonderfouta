@@ -1,17 +1,8 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
-import {
-  Elements,
-  CardElement,
-  ElementsConsumer,
-} from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
 import { commerce } from "../../../lib/commerce";
-import Review from "../Review";
 import PaymentForm from "../PaymentForm";
 
 const Checkout = (props) => {
-  console.log(props);
   //   const [items, setItems] = useState();
   //   const [total, setTotal] = useState();
   //   const [address, setAddress] = useState();
@@ -41,7 +32,7 @@ const Checkout = (props) => {
         });
         setCheckoutToken(token);
       } catch (error) {
-        console.log("token failed");
+        console.log("token failed: There are not items in the cart");
       }
     };
     generateToken();
