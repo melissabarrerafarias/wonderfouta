@@ -7,7 +7,7 @@ const Review = ({ checkoutToken }) => {
       <ul>
         {checkoutToken.live.line_items.map((product) => (
           <li key={product.name}>
-            <img src={product.media.source} style={{ maxWidth: "100px" }} />
+            <img src={product.image.url} style={{ maxWidth: "100px" }} />
             Name: {product.name}
             Color: {product.selected_options[0].option_name}
             quantity: {product.quantity}

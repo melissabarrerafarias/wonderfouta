@@ -21,7 +21,7 @@ import PaymentForm from "./components/checkoutForm/PaymentForm";
 
 function App() {
   const stripePromise = loadStripe(
-    "pk_test_51JeNXVIQMsLPZVRp4E9Qil9vKWTeJhX7Jf5UjP6YobbsZOyj5Sqxi59C3CKvr16KZNafSn0n3z6fNNiWyzDCr1wZ0001hWkjGw"
+  process.env.REACT_APP_STRIPE_KEY
   );
   console.log(stripePromise);
   const [products, setProducts] = useState([]);

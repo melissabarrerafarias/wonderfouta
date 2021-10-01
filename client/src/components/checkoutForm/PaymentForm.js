@@ -10,10 +10,11 @@ import {
 
 import Review from "./Review";
 import Confirmation from "./Confirmation";
-const PaymentForm = ({ checkoutToken, handleOnCaptureCheckout }) => {
+const PaymentForm = ({ checkoutToken, handleOnCaptureCheckout, order, error }) => {
   const stripe = useStripe();
   const elements = useElements();
   const [confirmed, setConfirmed] = useState(false);
+  console.log(order)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,10 +22,13 @@ const PaymentForm = ({ checkoutToken, handleOnCaptureCheckout }) => {
     if (!stripe || !elements) return;
 
     const cardElement = elements.getElement(CardElement);
+    
     const { error, paymentMethod } = await stripe.createPaymentMethod({
       type: "card",
       card: cardElement,
     });
+
+    // console.log(paymentMethod.id)
 
     if (error) {
       console.log(error);
@@ -40,15 +44,15 @@ const PaymentForm = ({ checkoutToken, handleOnCaptureCheckout }) => {
           name: "Primary",
           street: "633 Sinclair Dr",
           town_city: "San Jose",
-          county_state: "California",
-          postal_zip_code: 95116,
-          country: "United States",
+          // county_state: "CA",
+          // postal_zip_code: "95116",
+          country: "US",
         },
         fulfillment: {
-          shipping_method: "something",
+          shipping_method: checkoutToken.shipping_methods[0].id,
         },
         payment: {
-          gateway: "stripe",
+          gateway: "gway_roE4XEnXRJn7w8",
           stripe: {
             payment_method_id: paymentMethod.id,
           },
@@ -82,7 +86,7 @@ const PaymentForm = ({ checkoutToken, handleOnCaptureCheckout }) => {
     );
   };
 
-  return <>{!confirmed ? paymentForm() : <Confirmation />}</>;
+  return <>{!confirmed ? paymentForm() : <Confirmation order={order} error={error}/>}</>;
 };
 
 export default PaymentForm;
